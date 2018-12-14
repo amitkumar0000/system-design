@@ -1,0 +1,19 @@
+Things to consider designing large system
+    1. Architecture pieces that can be used
+    2. How these architecture pieces work with each other
+    3. how can we best utilize these pieces , right trade off
+
+Core Building Block of Scalable System:-
+    1. Load Balancing
+    2. Caching
+    3. Sharding or Data Partition
+    4. Indexes
+    5. Proxies
+    6. Queues
+    7. Redundancy and Replication
+    8. Sql vs NoSQL
+    9. CAP theorem
+    10. Consistent Hashing
+    11. Long-polling vs WebSockets vs Server-Sent Events
+    12.
+

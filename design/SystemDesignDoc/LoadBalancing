@@ -1,0 +1,67 @@
+Load Balancer
+-----------
+    1. LB spread traffic across cluster of servers to improve responsiveness and availability of application, websites and database.
+    2. LB also track status of all resources while distributing requests.
+        If a server is not available to take new request, or is not responding or have elevated error rate.
+        LB will stop sending traffic to that server.
+
+
+    Typically LB seat in between Client and Server. Distributing request across multiple server based on load balancing algorithm.
+    Thus reducing any server to becoming single point of failure, improving responsiveness and availability .
+
+
+    To utilize full scalability and redundancy, LB can be placed into three places
+
+    Client ---- LB--- WebServer----LB-----InternalPlatformLayer------LB--------DatabaseServer
+
+    internal platform layer  e.g  Application server or Cache Server
+
+Load Balancing Algorithm
+-------------------------
+Load Balancer should forward request to a healthy server. To check Health of Server, LB regularly does health check-up.
+
+Health-checkUp
+--------------
+    LB regularly try to establish connection with server and verify server is listening.
+    If health check failed, that server is removed from pool until it pass health check-up.
+
+There are variety of Load Balancing methods, which use different algorithms for different needs:-
+-----------------------------------------------------------------------------------------------
+1. Least Connection Methods:- This method direct request to server with least active connection.
+                                This is useful when large number of active  connection is distributed unevenly.
+2. Least Response time Methods:- This method direct request to server with least active connection and least average response  time.
+3. Least Bandwidth Method :- This method direct request to server that is serving least amount of traffic measured in Mbps.
+4. Round Robin Method :- This method cycle to the list of server of each request.
+                        This method is useful when all server are same specification.
+5. Weighted Round Robin Method :- This method assign a weight to each server. Based on weight request is forward to server.
+                               This is useful when server are different specification. Better server got more weight than lighter
+                               one. Weight server got more request.
+6. IP Hash :- This method calculate a Hash on IP address of client  to determine which server will receive request.
+
+Redundant Load Balancer
+------------------------
+Load Balancer can be single point of failure. To overcome this, redundant load balancer is added.
+Active and passive LB. Both LB monitor health of other. In case of active LB failure, passive take control
+
+
+Different ways to implement Load Balancing
+-------------------------------------------
+1. Smart Clients:- Smart Client can add the load balancing algorithm to the application or database client.
+                    Such client take a pool of server and balance load among them.
+                    It also discover server not responding and stop sending request to them.
+                    Smart client also need to rediscover hosts, deals with adding new hosts etc.
+                    Smart Client looks easy to implements when system is small but as system grows
+                    LB need to evolved as standalone server.
+
+2. Hardware Load Balancer.
+                    Dedicated hardware server of LB e.g: Citrix NetScaler. It is costly affair.
+
+3. Software Load Balancer :-
+        HAProxy is popular open source LB. It is proxy that can seat in client machine or immediate server.
+        In client each request bound to HAProxy port and passed to backend service in efficient manner.
+        HAProxy can be running between different server side components.
+
+
+For most systems, we should start with a software load balancer and move to smart clients or hardware load balancing as the need arises.
+
+
